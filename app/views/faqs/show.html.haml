@@ -1,0 +1,16 @@
+- content_for :crumb do
+  = link_to 'Home', '/'
+  \&gt;
+  \#{link_to 'FAQs', faqs_path} &gt;
+  Read FAQ
+- blue_box "View FAQ" do
+  %h1{:style => "margin-top: 0;"}= h @faq.question
+  = @faq.answer
+  %p.gray{:style => "margin-bottom: 0;"}
+    Tags: #{@faq.tag_list.collect { |t| link_to(h(t), tag_faq_path(t)) }.join(', ')}
+- unless @related_faqs.empty?
+  - purple_box "Related Questions" do
+    = render :partial => "faqs", :locals => { :faqs => @related_faqs }
+- if @related_faqs.empty? and !@faqs.empty?
+  - purple_box "Other Frequently Asked Questions" do
+    = render :partial => "faqs"

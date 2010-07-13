@@ -1,0 +1,8 @@
+- content_for :crumb do
+  = link_to "Admin Home", "/admin"
+  \&raquo;
+  \#{link_to "FAQs", admin_faqs_path} &raquo;
+  Edit FAQ
+%h1 Edit FAQ
+- form_for :faq, :url => admin_faq_path(@faq), :html => { :method => :put } do |f|
+  = render :partial => "form", :locals => { :f => f }

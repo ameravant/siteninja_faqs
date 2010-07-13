@@ -1,0 +1,5 @@
+- unless @tags.empty?
+  - purple_box "Browse by tag" do
+    .center
+      - tag_cloud @tags, %w(cloud1 cloud2 cloud3 cloud4 cloud5 cloud6) do |tag, css_class|
+        = link_to h(tag.name.downcase), tag_faq_path(tag.name.downcase), :class => css_class

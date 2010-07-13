@@ -1,0 +1,3 @@
+%h1 Create a new FAQ
+- form_for :faq, :url => admin_faqs_path do |f|
+  = render :partial => "form", :locals => { :f => f }

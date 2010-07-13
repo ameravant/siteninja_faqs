@@ -1,0 +1,17 @@
+%h1 Frequently Asked Questions
+%p.icon
+  = icon("Plus", new_admin_faq_path)
+  = link_to "Create a new FAQ", new_admin_faq_path
+- unless @faqs.empty?
+  %p.note-box
+    %strong Tip:
+    Change the order your FAQs are listed by clicking then dragging the #{icon "Direction Vert"} icon up or down.
+    %br
+  %style{:media => "screen", :type => "text/css"}
+    #sortable_list { padding: 0; margin: 0; }
+    #sortable_list li { list-style: none; display: block; padding: 4px; vertical-align: middle; }
+  %ul#sortable_list
+    = render :partial => 'faq', :collection => @faqs
+  = sortable_element 'sortable_list', :update => 'faqs', :url => update_positions_admin_faqs_path, :method => :put, :handle => "handle"
+- unless @faqs.total_pages == 1
+  %p= will_paginate @faqs

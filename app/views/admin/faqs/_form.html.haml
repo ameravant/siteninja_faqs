@@ -1,0 +1,19 @@
+= error_messages_for "faq"
+.form-option
+  %h2= f.label :question
+  %div= f.text_field :question, :max_length => 255, :size => 60
+.form-option
+  %h2= f.label :answer
+  %div= f.text_area :answer, :size => "80x30", :class => "mceEditor"
+.form-option
+  %h2
+    = f.label :tag_list, "Tags"
+    %span.small.gray &mdash; optional
+  .gray Separate tag words and phrases with commas.
+  %div= f.text_field :tag_list, :size => 50
+.form-option
+  %h2= f.label :position
+  %div= f.text_field :position, :size => 5
+%div
+  - fancy_submit admin_articles_path do
+    = f.submit "Save this faq"

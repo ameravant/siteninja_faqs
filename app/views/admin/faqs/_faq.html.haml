@@ -1,0 +1,5 @@
+%li{:id => dom_id faq}
+  = image_tag '/images/icons/16x16/Direction Vert.png', :class => 'handle icon', :id => "handle_#{faq.id}"
+  = icon "Write", edit_admin_faq_path(faq)
+  = trash_icon(faq, admin_faq_path(faq), "Faq")
+  
