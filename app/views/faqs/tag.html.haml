@@ -1,8 +1,3 @@
-- content_for :crumb do
-  = link_to 'Home', '/'
-  \&gt;
-  \#{link_to 'FAQs', faqs_path} &gt;
-  \#{h @tag.titleize} FAQs
-- blue_box "#{h(@tag.titleize)} FAQs" do
-  = render :partial => "faqs"
+%h1="#{h(@tag.titleize)} FAQs"
+= render :partial => "faqs"
 = render :partial => "tags"

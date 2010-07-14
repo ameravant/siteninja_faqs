@@ -1,5 +1,4 @@
-- faqs = @faqs unless faqs
-- unless faqs.empty?
+- unless @faqs.empty?
   %ul.faqs
-    - for f in faqs
+    - for f in @faqs
       %li= link_to h(f.question), faq_path(f.permalink)

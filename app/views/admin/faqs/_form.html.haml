@@ -11,9 +11,6 @@
     %span.small.gray &mdash; optional
   .gray Separate tag words and phrases with commas.
   %div= f.text_field :tag_list, :size => 50
-.form-option
-  %h2= f.label :position
-  %div= f.text_field :position, :size => 5
 %div
   - fancy_submit admin_articles_path do
-    = f.submit "Save this faq"
+    = f.submit "Save this FAQ"

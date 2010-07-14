@@ -1,17 +1,27 @@
 %h1 Frequently Asked Questions
-%p.icon
-  = icon("Plus", new_admin_faq_path)
-  = link_to "Create a new FAQ", new_admin_faq_path
+.box
+  #reorder_status.gray.float-right{:style => "display: none"}
+    = spinner
+    Reordering
+  %span.hmenu
+    = icon("Plus", new_admin_faq_path)
+    = link_to "Create a new FAQ", new_admin_faq_path
 - unless @faqs.empty?
   %p.note-box
     %strong Tip:
     Change the order your FAQs are listed by clicking then dragging the #{icon "Direction Vert"} icon up or down.
     %br
-  %style{:media => "screen", :type => "text/css"}
-    #sortable_list { padding: 0; margin: 0; }
-    #sortable_list li { list-style: none; display: block; padding: 4px; vertical-align: middle; }
-  %ul#sortable_list
-    = render :partial => 'faq', :collection => @faqs
-  = sortable_element 'sortable_list', :update => 'faqs', :url => update_positions_admin_faqs_path, :method => :put, :handle => "handle"
+  %ul.sortable{:id => "sortable_list"}
+    -@faqs.each do |faq|
+      %li{:id => "#{dom_id(faq)}", :class => cycle('odd', 'even')}
+        = image_tag("#{move_loc}", :class => "icon handle")
+        = link_to(truncate(faq.question, :length => 100), edit_admin_faq_path(faq))
+        %span{:style => "float:right;"}
+          = icon "Write", edit_admin_faq_path(faq)
+          = trash_icon(faq, admin_faq_path(faq), "this FAQ")
+
+
+  / = sortable_element 'sortable_list', :update => 'faqs', :url => update_positions_admin_faqs_path, :method => :put
+  = sortable_element("sortable_list", :url => update_positions_admin_faqs_path, :method => :put, :loading => "$('ajax_spinner').src='#{spinner_loc}'; $('reorder_status').show();", :success => "$('ajax_spinner').src='#{ok_loc}'", :failure => "$('ajax_spinner').src='#{exclamation_loc}'", :complete => visual_effect(:fade, "reorder_status", :delay => 1))
 - unless @faqs.total_pages == 1
   %p= will_paginate @faqs
