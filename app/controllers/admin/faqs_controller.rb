@@ -1,7 +1,9 @@
 class Admin::FaqsController < AdminController
   before_filter :delete_caches, :except => [ :index, :new, :edit ]
+  before_filter :add_crumbs, :except => :index
 
   def index
+    add_breadcrumb "Faqs"
     @faqs = Faq.paginate(:page => params[:page], :per_page => 15, :order => "position")
   end
 
@@ -16,6 +18,7 @@ class Admin::FaqsController < AdminController
   end
 
   def new
+    add_breadcrumb "New"
     @meta_title = "New FAQ"
     @faq ||= Faq.new
   end
@@ -31,6 +34,7 @@ class Admin::FaqsController < AdminController
   end
 
   def edit
+    add_breadcrumb "Edit"
     @meta_title = "Edit FAQ"
     @faq = Faq.find(params[:id])
   end
@@ -55,6 +59,10 @@ class Admin::FaqsController < AdminController
 
   
   private
+    def add_crumbs
+      add_breadcrumb "Faqs", admin_faqs_path
+    end
+  
   
     def delete_caches
       Rails.cache.delete('Faq.cached_all')
