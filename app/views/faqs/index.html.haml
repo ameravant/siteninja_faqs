@@ -1,6 +1,5 @@
 %h1 Frequently Asked Questions
 
-%br
 - unless params[:q].blank?
   %h2{:style => "margin-top: 0;"}
     Found #{pluralize(@faqs_all.size, 'question')}.
@@ -8,3 +7,7 @@
 - unless @faqs.total_pages == 1
   %p= will_paginate @faqs
 = render :partial => "tags"
+
+- content_for :head do
+  %style{:type => "text/css"}
+    ul#faqs { }

@@ -1,5 +1,5 @@
 class FaqsController < ApplicationController
-  
+  unloadable
   def index
     @meta_title = "Frequently Asked Questions"
     if params[:q].blank?
@@ -17,6 +17,7 @@ class FaqsController < ApplicationController
     @faqs = Faq.find(:all, :limit => 5, :conditions => ["id not in (?)", @related_faqs.collect(&:id)])
     @related_faqs.reject! { |x| x.id == @faq.id } # reject shown faq    
     @meta_title = @faq.question
+    @tags = Faq.tag_counts
   end
   
   def tag
