@@ -5,6 +5,6 @@
 - unless @related_faqs.empty?
   = render :partial => "faqs", :locals => { :faqs => @related_faqs }
 - if @related_faqs.empty? and !@faqs.empty?
-  = render :partial => "faqs"
+  = render :partial => "faqs", :locals => { :faqs => @faqs }
 
 = render :partial => "tags"
