@@ -1,5 +1,6 @@
 %h1{:style => "margin-top: 0;"}= h @faq.question
-= @faq.answer
+.faq-answer{:style => "background-color:#d1d1d1;"}
+  = @faq.answer
 %p.gray{:style => "margin-bottom: 0;"}
   ="Tags: #{@faq.tag_list.collect { |t| link_to(h(t), tag_faq_path(t)) }.join(', ')}"
 - unless @related_faqs.empty?
