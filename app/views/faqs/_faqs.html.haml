@@ -2,4 +2,5 @@
   %ul.faqs
     - for f in faqs
       %li
-        %h3= link_to h(f.question), faq_path(f.permalink)
+        %h3{:style => "font-size:1.2em;"}
+          = link_to h(f.question), faq_path(f.permalink)
